@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import firebase from 'firebase';
 
 import logo from './logo.svg';
 import './style.css';
@@ -18,6 +19,7 @@ export default class App extends Component {
   }
 
   render() {
+    console.log(firebase.database());
     return (
       <div className="App">
         <div className="App-header">

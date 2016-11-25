@@ -12,8 +12,10 @@ describe('CommentStore', () => {
     store.addComment('test2');
 
     const wrapper = shallow(<App commentStore={store} />);
+
     expect(wrapper.find('ul li').at(0).text()).toBe('test1');
     expect(wrapper.find('ul li').at(1).text()).toBe('test2');
     expect(wrapper.find('li').length).toBe(2);
+    expect(store.comments.length).toBe(2);
   });
 });

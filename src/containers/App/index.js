@@ -1,13 +1,26 @@
 import React, { Component } from 'react';
-import firebase from 'firebase';
+import * as firebase from 'firebase';
 
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './style.css';
 
 export default class App extends Component {
   constructor() {
     super();
-    this.state = { text: '' }
+    this.state = {
+      text: '',
+      speed: 10
+    }
+  }
+
+  componentDidMount() {
+    const rootRef = firebase.database().ref().child('react');
+    const speedRef = rootRef.child('speed');
+    speedRef.on('value', (snap) => { // on changes to the speed reference
+      this.setState({
+        speed: snap.val()
+      });
+    });
   }
 
   handleTextChange = (e) => this.setState({text: e.target.value});
@@ -18,17 +31,18 @@ export default class App extends Component {
     this.setState({text: ''});
   }
 
+  changeSpeed = () => {
+    const rootRef = firebase.database().ref().child('react');
+    rootRef.set({speed: 21, age: 12});
+  }
+
   render() {
     console.log(firebase.database());
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Ahh phew noo yoo, noo</h2>
-        </div>
-        <p className="App-intro">
-          To asdfasf started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <h1>{this.state.speed}</h1>
+
+        <button onClick={this.changeSpeed}>Change Speed</button>
 
         <form onSubmit={this.handleSubmit}>
           <input

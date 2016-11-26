@@ -15,7 +15,7 @@ export default class App extends Component {
 
   componentDidMount() {
     const rootRef = firebase.database().ref().child('react');
-    const speedRef = rootRef.child('speed');
+    const speedRef = rootRef.child('others').child('pandas');
     speedRef.on('value', (snap) => { // on changes to the speed reference
       this.setState({
         speed: snap.val()
@@ -32,8 +32,8 @@ export default class App extends Component {
   }
 
   changeSpeed = () => {
-    const rootRef = firebase.database().ref().child('react');
-    rootRef.set({speed: 21, age: 12});
+    const rootRef = firebase.database().ref().child('react/others');
+    rootRef.set({pandas: 18});
   }
 
   render() {

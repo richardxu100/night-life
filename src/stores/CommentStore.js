@@ -1,5 +1,5 @@
 import { observable, action } from 'mobx';
-import firebase from 'firebase';
+import * as firebase from 'firebase';
 
 class Comment {
   @observable text;

@@ -37,7 +37,7 @@ export default class About extends Component {
   }
 
   loginWithGoogle = () => {
-    this.props.userStore.googleLogin();
+    this.props.userStore.loginWithGoogle();
   }
 
   logout = () => firebase.auth().signOut();

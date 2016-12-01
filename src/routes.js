@@ -9,10 +9,11 @@ import NotFound from './containers/NotFound';
 import MainLayout from './containers/MainLayout';
 import Todo from './containers/Todo';
 import { commentStore } from './stores/CommentStore';
+import { userStore } from './stores/UserStore';
 
 // we're creating a component!
 const routes = (
-  <Provider commentStore={commentStore}>
+  <Provider commentStore={commentStore} userStore={userStore}>
     <MuiThemeProvider>
       <Router history={browserHistory}>
         <Route path="/" component={MainLayout}>

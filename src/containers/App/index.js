@@ -9,18 +9,39 @@ export default class App extends Component {
     super();
     this.state = {
       text: '',
-      speed: 10
+      data: 10,
+      children: []
     }
   }
 
   componentDidMount() {
     const rootRef = firebase.database().ref().child('react');
-    const speedRef = rootRef.child('others').child('pandas');
-    speedRef.on('value', (snap) => { // on changes to the speed reference
-      this.setState({
-        speed: snap.val()
-      });
+    // const speedRef = rootRef.child('speed');
+    rootRef.on('value', (snap) => {
+      this.setState({data: snap.val()})
     });
+
+    rootRef.on('child_added', (snap) => { // on changes to the speed reference
+      console.log('child_added: ', snap.val());
+      this.setState({
+        children: [...this.state.children, snap.val()]
+      })
+    })
+  }
+
+  updateHobbies = () => {
+    // a post entry
+    const hobbyData = ['running', 'punching'];
+
+    // get a new key for a new update
+    // const newHobbyKey = firebase.database().ref().child('hobbies').push().key;
+
+    // update in two places
+    const updates = {};
+    updates['/hobbies'] = hobbyData;
+    updates['/users/0/hobbies'] = hobbyData;
+
+    return firebase.database().ref().update(updates);
   }
 
   handleTextChange = (e) => this.setState({text: e.target.value});
@@ -33,30 +54,36 @@ export default class App extends Component {
 
   changeSpeed = () => {
     const rootRef = firebase.database().ref().child('react/others');
-    rootRef.set({pandas: 18});
+    rootRef.set({pandas: 118});
   }
 
   render() {
-    console.log(firebase.database());
+    // console.log(firebase.database());
     return (
-      <div className="App">
-        <h1>{this.state.speed}</h1>
-
-        <button onClick={this.changeSpeed}>Change Speed</button>
-
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            onChange={this.handleTextChange}
-            value={this.state.text} />
-          <input type="submit" style={{display: 'none'}}/>
-        </form>
-
+      <div>
+        <pre>{JSON.stringify(this.state.data, null, 3)}</pre>
         <ul>
-          {this.props.commentStore.comments.map((comment, i) =>
-            <li key={i}>{comment.text}</li>
+          {this.state.children.map((child, i) =>
+            <li key={i}>{child}</li>
           )}
         </ul>
+        <div className="App">
+          <button onClick={this.updateHobbies}>Update Hobbies</button>
+
+          <form onSubmit={this.handleSubmit}>
+            <input
+              type="text"
+              onChange={this.handleTextChange}
+              value={this.state.text} />
+            <input type="submit" style={{display: 'none'}}/>
+          </form>
+
+          <ul>
+            {this.props.commentStore.comments.map((comment, i) =>
+              <li key={i}>{comment.text}</li>
+            )}
+          </ul>
+        </div>
       </div>
     );
   }

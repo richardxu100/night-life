@@ -23,7 +23,8 @@ function getClientEnvironment(publicUrl) {
       'PUBLIC_URL': JSON.stringify(publicUrl),
       'DATABASE_NAME': JSON.stringify('night-life-150418.firebaseio.com'),
       'PROJECT_ID': JSON.stringify('night-life-150418'),
-      'API_KEY': JSON.stringify('AIzaSyCX5dwZnIpX6nmPwScaJt2j-cQ7cdyqdrg')
+      'API_KEY': JSON.stringify('AIzaSyCX5dwZnIpX6nmPwScaJt2j-cQ7cdyqdrg'),
+      'STORAGE_BUCKET': JSON.stringify('night-life-150418.appspot.com')
     });
   return {'process.env': processEnv};
 }

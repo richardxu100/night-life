@@ -7,6 +7,7 @@ import App from './containers/App';
 import About from './containers/About';
 import NotFound from './containers/NotFound';
 import MainLayout from './containers/MainLayout';
+import Todo from './containers/Todo';
 import { commentStore } from './stores/CommentStore';
 
 // we're creating a component!
@@ -17,6 +18,7 @@ const routes = (
         <Route path="/" component={MainLayout}>
           <IndexRoute component={App} />
           <Route path="/about" component={About} />
+          <Route path="/todo" component={Todo} />
           <Route path="*" component={NotFound} />
         </Route>
       </Router>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 import AppBar from 'material-ui/AppBar';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import { inject, observer } from 'mobx-react';
 
 @inject('commentStore') @observer

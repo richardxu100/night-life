@@ -19,7 +19,7 @@ export default class About extends Component {
   componentDidMount() {
     firebase.auth().onAuthStateChanged((firebaseUser) => {
       if (firebaseUser) {
-        console.log(firebaseUser);
+        console.log(firebaseUser.providerData);
         this.setState({isLoggedIn: true});
       } else {
         console.log('Not logged in');
@@ -36,6 +36,12 @@ export default class About extends Component {
     promise.catch(e => console.log(e.message));
   }
 
+  loginWithGoogle = () => {
+    this.props.userStore.googleLogin();
+  }
+
+  logout = () => firebase.auth().signOut();
+
   signUp = () => {
     const email = this._email.input.value;
     const password = this._password.input.value;
@@ -44,9 +50,6 @@ export default class About extends Component {
     promise.catch(e => console.log(e.message));
   }
 
-  logout = () => {
-    firebase.auth().signOut();
-  }
 
   render() {
     return (
@@ -77,6 +80,13 @@ export default class About extends Component {
           style={styles.button}
           secondary={true}
           onClick={this.signUp} />
+        <div>
+          <RaisedButton
+            label="Sign in with Google"
+            style={styles.button}
+            secondary={true}
+            onClick={this.loginWithGoogle} />
+        </div>
       </div>
     )
   }

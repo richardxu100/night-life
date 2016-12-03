@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 
-import logo from './logo.svg';
 import './style.css';
+import logo from './logo.svg';
 
 export default class App extends Component {
   constructor() {
     super();
-    this.state = { text: '' }
+    this.state = {
+      text: '',
+      comments: []
+    }
   }
 
   handleTextChange = (e) => this.setState({text: e.target.value});
@@ -15,6 +18,12 @@ export default class App extends Component {
     e.preventDefault();
     this.props.commentStore.addComment(this.state.text);
     this.setState({text: ''});
+  }
+
+  componentDidMount() {
+    this.props.commentStore.getComments((comments) => { // async code, yooo!
+      this.setState({comments})
+    })
   }
 
   render() {
@@ -37,7 +46,7 @@ export default class App extends Component {
         </form>
 
         <ul>
-          {this.props.commentStore.comments.map((comment, i) =>
+          {this.state.comments && this.state.comments.map((comment, i) =>
             <li key={i}>{comment.text}</li>
           )}
         </ul>

@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
 
-import logo from './logo.svg';
 import './style.css';
+import logo from './logo.svg';
 
 export default class App extends Component {
   constructor() {
     super();
-    this.state = { text: '' }
+    this.state = {
+      text: '',
+      comments: []
+    }
   }
 
   handleTextChange = (e) => this.setState({text: e.target.value});
@@ -17,12 +21,27 @@ export default class App extends Component {
     this.setState({text: ''});
   }
 
+  deleteComment = (key) => {
+    this.props.commentStore.deleteComment(key);
+  }
+
+  componentDidMount() {
+    this.props.commentStore.getComments((comments) => { // async code, yooo!
+      this.setState({comments})
+    })
+  }
+
+  loginWithGoogle = () => this.props.userStore.loginWithGoogle();
+
   render() {
     return (
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Ahh phew noo yoo, noo</h2>
+          <RaisedButton
+            label="Login to Google"
+            onClick={this.loginWithGoogle} />
         </div>
         <p className="App-intro">
           To asdfasf started, edit <code>src/App.js</code> and save to reload.
@@ -37,8 +56,11 @@ export default class App extends Component {
         </form>
 
         <ul>
-          {this.props.commentStore.comments.map((comment, i) =>
-            <li key={i}>{comment.text}</li>
+          {this.state.comments.map((comment) =>
+            <li
+              onClick={this.deleteComment.bind(this, comment.key)}
+              key={comment.key}>{comment.text}
+            </li>
           )}
         </ul>
       </div>

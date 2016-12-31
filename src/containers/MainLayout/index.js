@@ -3,7 +3,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import AppBar from 'material-ui/AppBar';
 import { inject, observer } from 'mobx-react';
 
-@inject('commentStore') @observer
+@inject('commentStore', 'userStore') @observer
 export default class MainLayout extends Component {
 
   componentWillMount = () => injectTapEventPlugin();

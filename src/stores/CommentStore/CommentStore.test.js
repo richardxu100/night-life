@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { testCommentStore } from './CommentStore';
-import App from '../containers/App';
+import App from '../../containers/App';
 
 describe('CommentStore', () => {
   it('adds a comment', () => {

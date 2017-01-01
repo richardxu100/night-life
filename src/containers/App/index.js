@@ -38,10 +38,10 @@ export default class App extends Component {
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Ahh phew noo yoo, noo</h2>
-          <RaisedButton
+          <h2>Night-Life App</h2>
+          {/* <RaisedButton
             label="Login to Google"
-            onClick={this.loginWithGoogle} />
+            onClick={this.loginWithGoogle} /> */}
         </div>
         <p className="App-intro">
           To asdfasf started, edit <code>src/App.js</code> and save to reload.
@@ -58,7 +58,7 @@ export default class App extends Component {
         <ul>
           {this.state.comments.map((comment) =>
             <li
-              onClick={this.deleteComment.bind(this, comment.key)}
+              onClick={() => this.deleteComment(comment.key)}
               key={comment.key}>{comment.text}
             </li>
           )}

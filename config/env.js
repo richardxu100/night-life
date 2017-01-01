@@ -20,6 +20,8 @@ function getClientEnvironment(publicUrl) {
       // For example, <img src={process.env.PUBLIC_URL + '/img/logo.png'} />.
       // This should only be used as an escape hatch. Normally you would put
       // images into the `src` and `import` them in code to get their paths.
+      // Need to JSON.stringify()
+      'AUTH_DOMAIN': JSON.stringify('night-life-150418.firebaseapp.com'),
       'PUBLIC_URL': JSON.stringify(publicUrl),
       'DATABASE_NAME': JSON.stringify('night-life-150418.firebaseio.com'),
       'PROJECT_ID': JSON.stringify('night-life-150418'),

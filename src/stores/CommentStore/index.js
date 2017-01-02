@@ -34,7 +34,6 @@ class CommentStore {
       console.log('deleteComment is successful!');
     }).catch(err => console.log(err));
   }
-
 }
 
 const commentStore = window.commentStore = new CommentStore();

@@ -5,20 +5,18 @@ import base from '../../config/rebase';
 class UserStore {
   @observable users = [];
 
-  @action loginWithGoogle = () => {
-    console.log('logged in with google!');
+  @action loginWithProvider = (providerName) => {
+    console.log(`logged in with ${providerName}!`);
     const authHandler = (err, user) => {
       if (err) {
         return console.log('error with login: ', err);
       }
       console.log('the user is ', user);
     }
-    base.authWithOAuthPopup('google', authHandler);   
+    base.authWithOAuthPopup(providerName, authHandler);
   }
 }
 
 const userStore = window.userStore = new UserStore();
 
-module.exports = {
-  userStore
-}
+module.exports = { userStore }

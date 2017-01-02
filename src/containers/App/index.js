@@ -31,23 +31,18 @@ export default class App extends Component {
     })
   }
 
-  loginWithGoogle = () => this.props.userStore.loginWithGoogle();
-
   render() {
     return (
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Night-Life App</h2>
-          {/* <RaisedButton
-            label="Login to Google"
-            onClick={this.loginWithGoogle} /> */}
         </div>
         <p className="App-intro">
           To asdfasf started, edit <code>src/App.js</code> and save to reload.
         </p>
 
-        <form onSubmit={this.handleSubmit}>
+        {/* <form onSubmit={this.handleSubmit}>
           <input
             type="text"
             onChange={this.handleTextChange}
@@ -62,7 +57,7 @@ export default class App extends Component {
               key={comment.key}>{comment.text}
             </li>
           )}
-        </ul>
+        </ul> */}
       </div>
     );
   }

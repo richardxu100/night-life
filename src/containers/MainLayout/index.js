@@ -22,7 +22,12 @@ export default class MainLayout extends Component {
   handleClose = () => this.setState({open: false});
 
   loginWithProvider = (providerName) => {
-    this.props.userStore.loginWithProvider(providerName);
+    this.props.userStore.loginWithProvider(providerName, (res) => {
+      if (res === 'success') {
+        return this.setState({open: false});
+      }
+      alert(res);
+    });
   }
 
   renderSocialButton = (socialMediaName, color) =>

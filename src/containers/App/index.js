@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
+import { observer } from 'mobx-react';
 
 import './style.css';
 import logo from './logo.svg';
 
+@observer
 export default class App extends Component {
   constructor() {
     super();
@@ -39,8 +41,9 @@ export default class App extends Component {
           <h2>Night-Life App</h2>
         </div>
         <p className="App-intro">
-          To asdfasf started, edit <code>src/App.js</code> and save to reload.
+          {/* The number is {this.props.userStore.randNum} */}
         </p>
+        <RaisedButton label={`The number is ${this.props.userStore.randNum}`}/>
 
         {/* <form onSubmit={this.handleSubmit}>
           <input

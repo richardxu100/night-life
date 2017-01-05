@@ -7,4 +7,6 @@ const base = Rebase.createClass({
   storageBucket: process.env.STORAGE_BUCKET
 });
 
+window.base = base;
+
 export default base;
